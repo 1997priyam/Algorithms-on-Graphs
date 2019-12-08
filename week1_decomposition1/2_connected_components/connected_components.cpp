@@ -4,9 +4,35 @@
 using std::vector;
 using std::pair;
 
+void explore(vector<vector<int>> adj, int source, vector<int> &visited, vector<int> &ccnum, int cc){
+  visited[source] = 1;
+  ccnum[source] = cc;
+  for(auto neighbour: adj[source]){
+    if(visited[neighbour] == 0)
+    explore(adj, neighbour, visited, ccnum, cc);
+  }
+}
+
+vector<int> dfs(vector<vector<int> > adj){
+  vector<int> ccnum(adj.size());
+  vector<int> visited(adj.size(), 0);
+  int cc = 1;
+  for(int i=0; i<adj.size(); i++){
+    if(visited[i] == 0){
+      explore(adj, i, visited, ccnum, cc);
+      cc++;
+    }
+  }
+  return ccnum;
+}
+
 int number_of_components(vector<vector<int> > &adj) {
   int res = 0;
   //write your code here
+  vector<int> ccnum = dfs(adj);
+  for(auto num: ccnum){
+    if(num > res) res=num;
+  }
   return res;
 }
 
