@@ -5,9 +5,27 @@
 using std::vector;
 using std::queue;
 
+void bfs(vector<vector<int>> adj, int source, vector<int> &dist){
+  dist[source] = 0;
+  queue<int> q;
+  q.push(source);
+  while(q.empty() != true){
+    int vertex = q.front();
+    q.pop();
+    for(int neighbour: adj[vertex]){
+      if(dist[neighbour] == -1){
+        q.push(neighbour);
+        dist[neighbour] = dist[vertex] + 1;
+      }
+    }
+  }
+}
+
 int distance(vector<vector<int> > &adj, int s, int t) {
   //write your code here         // Implement the BFS traversal and calculate the shortest dist b/w 2 given nodes
-  return -1;
+  vector<int> dist(adj.size(), -1);
+  bfs(adj, s, dist);
+  return dist[t];
 }
 
 int main() {
