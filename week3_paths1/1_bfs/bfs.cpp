@@ -9,13 +9,13 @@ void bfs(vector<vector<int>> adj, int source, vector<int> &dist){
   dist[source] = 0;
   queue<int> q;
   q.push(source);
-  while(q.empty() != true){
+  while(q.empty() != true){   // Looping on the queue till its not empty
     int vertex = q.front();
     q.pop();
-    for(int neighbour: adj[vertex]){
-      if(dist[neighbour] == -1){
-        q.push(neighbour);
-        dist[neighbour] = dist[vertex] + 1;
+    for(int neighbour: adj[vertex]){    // Iterating over each neighbour of the vertex popped from the queue
+      if(dist[neighbour] == -1){        // If the vertex is unvisited
+        q.push(neighbour);              // Push it in the queue
+        dist[neighbour] = dist[vertex] + 1; // Update its distance as the distance of its parent + 1
       }
     }
   }
