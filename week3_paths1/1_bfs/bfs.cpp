@@ -6,7 +6,7 @@ using std::vector;
 using std::queue;
 
 int distance(vector<vector<int> > &adj, int s, int t) {
-  //write your code here
+  //write your code here         // Implement the BFS traversal and calculate the shortest dist b/w 2 given nodes
   return -1;
 }
 
