@@ -7,7 +7,25 @@ using std::queue;
 
 int bipartite(vector<vector<int> > &adj) {
   //write your code here
-  return -1;
+  vector<int> colour(adj.size(), -1);
+  queue<int> q;
+  q.push(0);
+  colour[0] = 1;
+  while(q.empty()==false){    // Iterating over the queue
+    int current = q.front();
+    q.pop();
+
+    for(int neighbour: adj[current]){   // Iterating over each neighbour
+      if(colour[neighbour] == -1){     // If the node is unvisited
+        colour[neighbour] = 1 - colour[current];  // Assign the opposite colour
+        q.push(neighbour);              // Push in the queue
+      }
+      else if(colour[neighbour] == colour[current]){  // If the colour of neighbour is same as current node return false
+        return 0;
+      }
+    }
+  }
+  return 1;
 }
 
 int main() {
