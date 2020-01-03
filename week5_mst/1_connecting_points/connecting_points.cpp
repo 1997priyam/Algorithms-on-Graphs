@@ -41,9 +41,30 @@ void make_set(vector<node> &nodes, vector<int> &x, vector<int> &y){
   }
 }
 
+void make_edges(vector<edge> &edges, vector<int> &x, vector<int> &y){
+	for(int i=0; i<x.size(); i++){
+		for(int j=i+1; j<x.size(); j++){
+			edges.push_back(edge(i, j, get_weight(x[i], y[i], x[j], y[j])));
+		}
+	}
+}
+
+double get_weight(int x1, int y1, int x2, int y2) {
+  return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+}
+
+bool cmp(edge a, edge b) {
+  return a.weight < b.weight;
+}
+
 double minimum_distance(vector<int> x, vector<int> y) {
   double result = 0.;
   //write your code here
+  vector<node> nodes;
+  vector<edge> edges;
+  make_set(nodes, x, y);
+  make_edges(edges, x, y);
+  std::sort(edges.begin(), edges.end(), cmp);
   return result;
 } 
 
